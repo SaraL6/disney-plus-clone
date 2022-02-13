@@ -1,23 +1,38 @@
 import React from 'react'
 import styled from 'styled-components'
+import { selectPopular } from '../../features/movie/movieSlice'
+import { useSelector } from 'react-redux'
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function Movies() {
+    const popularMovies = useSelector(selectPopular);
+    let settings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 3,
+        autoplay: true
+
+    }
+    
+
     return (
         <Container>
             <h4>Recommended for You</h4>
             <Content>
-                <Wrap>
-                    <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/6A7F6C940FBD19A243E207069D16077FF0E53A519ED7D4892E7B8762834B74A6/scale?width=1200&aspectRatio=1.78&format=jpeg" alt="" />
-                </Wrap>
-                <Wrap>
-                    <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/6A7F6C940FBD19A243E207069D16077FF0E53A519ED7D4892E7B8762834B74A6/scale?width=1200&aspectRatio=1.78&format=jpeg" alt="" />
-                </Wrap>
-                <Wrap>
-                    <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/6A7F6C940FBD19A243E207069D16077FF0E53A519ED7D4892E7B8762834B74A6/scale?width=1200&aspectRatio=1.78&format=jpeg" alt="" />
-                </Wrap>
-                <Wrap>
-                    <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/6A7F6C940FBD19A243E207069D16077FF0E53A519ED7D4892E7B8762834B74A6/scale?width=1200&aspectRatio=1.78&format=jpeg" alt="" />
-                </Wrap>
+                <Carousel {...settings}>
+
+                    {popularMovies && popularMovies.map((popularMovie) =>
+                        <Wrap key={popularMovie.id}>
+                            <img src={popularMovie.CardImg} alt="" />
+                        </Wrap>
+                    )}
+                </Carousel>
+
+
             </Content>
             test
         </Container>
@@ -38,23 +53,39 @@ grid-template-columns:repeat(4,minmax(0,1fr));
 const Wrap = styled.div`
 border-radius:10px;
 cursor:pointer;
-overflow:hidden;
-border:3px solid rgba(249,249,249,0.1);
-box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px,
-rgb(0 0 0 /73%) 0px 16px 10px -10px;
-transition: all 250ms cubic-bezier(0.25,0.46,0.45,0.94) 0s;
 img{
+    border:4px solid transparent;
+    border-radius:4px;
     width:100%;
     height:100%;
-    object-fit:cover;
-}
+    box-shadow:rgb(0 0 0 / 69%) 0px 26px 30px -10px,
+    rgb(0 0 0/73%) 0px 16px 10px -10px;
+    transition-duration:300ms;
+
     &:hover{
-        transform:scale(1.05);
-        box-shadow:rgb(0 0 0 / 80%) 0 px 40px 58px -16px,
-        rgb(0 0 0 / 72%) 0px 30px 22px -10px;
-        border-color:rgba(249,249,249,0.8);
+        border:4px solid rgba(249,249,249,0.8);
     }
-
+}
 `
+const Carousel = styled(Slider)`
+margin-top:20px;
 
+ul lu button{
+    &:before{
+        font-size:10px;
+        color:rgb(150,158,171);
+    }
+}
+
+li.slick-active button:before{
+    color:white;
+}
+.slick-list{
+    overflow:visible;
+}
+button{
+    z-index:1;
+
+}
+`
 
