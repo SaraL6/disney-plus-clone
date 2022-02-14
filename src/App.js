@@ -11,6 +11,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -18,10 +19,11 @@ function App() {
       <Router>
         <Header />
         <Routes >
-          <Route path="/login" element={<Login/>}></Route>
+          <Route path="/login" element={<Login />}></Route>
           <Route path="/detail" element={<Detail />}> </Route>
           <Route path="/" element={<Home />}></Route>
         </Routes >
+        <Footer />
       </Router>
     </div>
   );

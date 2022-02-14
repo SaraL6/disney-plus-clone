@@ -7,10 +7,14 @@ import Viewers from './Viewers'
 import Hollywood from './Hollywood'
 import New from './New'
 import KidsTv from './KidsTv'
+import Trending from './Trending'
+import Row from './API_components/Row'
+import requests from '../../app/requests'
 import db from '../../firebase'
 import { setMovies } from '../../features/movie/movieSlice'
 import { useDispatch } from 'react-redux'
-import Trending from './Trending'
+
+
 
 
 
@@ -71,12 +75,22 @@ function Home() {
     <Container>
       <ImgSlider />
       <Viewers />
-      <Movies />
+
+      {/* <Movies />
       <Originals />
       <Hollywood/>
       <New/>
       <KidsTv/>
-      <Trending/>
+      <Trending/> */}
+
+      {/* API Components */}
+      <Row title={"Disney Movies"} fetchUrl={requests.fetchDisney}></Row>
+      <Row title={"Action and Adventures"} fetchUrl={requests.fetchMarvel}></Row>
+      <Row title={"Disney Classics"} fetchUrl={requests.fetchDisneyClassics}></Row>
+      <Row title={"Disney Series"} fetchUrl={requests.fetchDisneySeries}></Row>
+      <Row title={"Pixar Movies"} fetchUrl={requests.fetchPixar}></Row>
+      {/* <Row title={"Pixar Music"} fetchUrl={requests.fetchMusicPixar}></Row>
+      <Row title={"The Simpsons"} fetchUrl={requests.fetchSimpsons}></Row> */}
     </Container>
   )
 }

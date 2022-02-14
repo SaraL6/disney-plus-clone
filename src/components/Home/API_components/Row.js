@@ -1,15 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
-import { selectPopular } from '../../features/movie/movieSlice'
-import { useSelector } from 'react-redux'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-
-function Movies() {
-    const popularMovies = useSelector(selectPopular);
+import useRow from '../../hooks/useRow'
+function Row({ title, fetchUrl }) {
+    const { medias } = useRow(fetchUrl);
+    console.log(medias);
     let settings = {
+        className: "center",
+        centerMode: true,
+        centerPadding: "60px",
         dots: false,
         infinite: true,
         speed: 500,
@@ -18,25 +19,29 @@ function Movies() {
         autoplay: false
     }
 
-
     return (
-        <Container>
-            <h4>Recommended for You</h4>
-            <Carousel {...settings}>
+        <>
+            {medias.length > 0 && (
+                <Container>
+                    <h4> {title} </h4>
+                    <Carousel {...settings}>
 
-                {popularMovies && popularMovies.map((popularMovie) =>
-                    <Wrap key={popularMovie.id}>
-                        <img src={popularMovie.CardImg} alt="" />
-                    </Wrap>
-                )}
-            </Carousel>
+                        {medias.map((media) =>
 
+                            <Wrap key={media.id} >
+                                <img src={`https://image.tmdb.org/t/p/w500/${media.backdrop_path}`} alt="" />
+                            </Wrap>
 
-        </Container>
+                        )}
+
+                    </Carousel>
+
+                </Container>)}
+        </>
     )
 }
 
-export default Movies
+export default Row
 
 const Container = styled.div`
 
@@ -79,4 +84,3 @@ button{
 
 }
 `
-
