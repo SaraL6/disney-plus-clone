@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 	Nunito-Regular;
+    src: url(/public/fonts/nunito.regular.ttf);
+    
+  }
+
 *{
     box-sizing: border-box;
+    font-family: Nunito-Regular;
+  
 }

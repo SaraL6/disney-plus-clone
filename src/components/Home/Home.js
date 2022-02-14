@@ -2,10 +2,16 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import ImgSlider from './ImgSlider'
 import Movies from './Movies'
+import Originals from './Originals'
 import Viewers from './Viewers'
+import Hollywood from './Hollywood'
+import New from './New'
+import KidsTv from './KidsTv'
 import db from '../../firebase'
 import { setMovies } from '../../features/movie/movieSlice'
 import { useDispatch } from 'react-redux'
+import Trending from './Trending'
+
 
 
 function Home() {
@@ -21,8 +27,6 @@ function Home() {
   useEffect(() => {
     db.collection("Movies").onSnapshot((snapshot) => {
       snapshot.docs.map((doc) => {
-
-
         switch (doc.data().type) {
           case "popular":
             populars = [...populars, { id: doc.id, ...doc.data() }];
@@ -68,6 +72,11 @@ function Home() {
       <ImgSlider />
       <Viewers />
       <Movies />
+      <Originals />
+      <Hollywood/>
+      <New/>
+      <KidsTv/>
+      <Trending/>
     </Container>
   )
 }

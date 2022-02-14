@@ -70,8 +70,9 @@ a{
 
     span{
         font-size: 13px;
-        letter-spacing:1.42px;
-        position:relative;
+        font-weight: 600;
+        letter-spacing: 3.42px;
+        position: relative;
         
         &:after{
             content:"";
@@ -93,6 +94,7 @@ a{
     &:hover{
         span:after{
             transform:scaleX(1);
+            
             opacity:1;
         }
     }

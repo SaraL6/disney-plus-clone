@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import { selectPopular } from '../../features/movie/movieSlice'
+import { selectHollywood } from '../../features/movie/movieSlice'
 import { useSelector } from 'react-redux'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-function Movies() {
-    const popularMovies = useSelector(selectPopular);
+function Hollywood() {
+    const hollywoods = useSelector(selectHollywood);
     let settings = {
         dots: false,
         infinite: true,
@@ -21,22 +21,23 @@ function Movies() {
 
     return (
         <Container>
-            <h4>Recommended for You</h4>
+            <h4>Hollywood</h4>
             <Carousel {...settings}>
 
-                {popularMovies && popularMovies.map((popularMovie) =>
-                    <Wrap key={popularMovie.id}>
-                        <img src={popularMovie.CardImg} alt="" />
+                {hollywoods && hollywoods.map((hollywood) =>
+                    <Wrap key={hollywood.id}>
+                        <img src={hollywood.CardImg} alt="" />
                     </Wrap>
                 )}
             </Carousel>
+
 
 
         </Container>
     )
 }
 
-export default Movies
+export default Hollywood
 
 const Container = styled.div`
 
