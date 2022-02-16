@@ -1,5 +1,5 @@
+
 const apiKey = '71034ea0995999968e56c3a6d624e0b4';
-const BASE_URL = 'https://api.themoviedb.org/3/';
 const requests = {
     fetchSimpsons: `list/7067554?api_key=${apiKey}&language=en-US`,
     fetchDisney: `list/5905?api_key=${apiKey}&language=en-US`,
@@ -20,5 +20,8 @@ const requests = {
     fetchStarWars: `list/8136?api_key=${apiKey}&language=en-US`,
     fetchStarWarsLego: `list/7067607?api_key=${apiKey}&language=en-US&sort_by=vote_average.asc`,
     fetchRandom: `list/7068720?api_key=${apiKey}&language=en-US&sort_by=vote_average.asc`,
+
+    // ******************
+
 };
 export default requests

@@ -3,7 +3,7 @@ import axios from "../axios";
 const useRow = (fetchUrl) => {
   const [medias, setMedia] = useState([]);
 
-  
+
   useEffect(() => {
     async function fetchMedia() {
       const request = await axios.get(fetchUrl);

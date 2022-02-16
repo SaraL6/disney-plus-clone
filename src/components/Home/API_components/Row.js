@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import Slider from "react-slick";
+import { Link } from 'react-router-dom';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import useRow from '../../hooks/useRow'
 function Row({ title, fetchUrl }) {
     const { medias } = useRow(fetchUrl);
-    console.log(medias);
     let settings = {
         className: "center",
         centerMode: true,
@@ -29,14 +29,17 @@ function Row({ title, fetchUrl }) {
                         {medias.map((media) =>
 
                             <Wrap key={media.id} >
-                                <img src={`https://image.tmdb.org/t/p/w500/${media.backdrop_path}`} alt="" />
+                                <Link to={`/detail/${media.id}`}>
+                                    <img src={`https://image.tmdb.org/t/p/w500/${media.backdrop_path}`} alt="" />
+                                </Link>
                             </Wrap>
 
                         )}
 
                     </Carousel>
 
-                </Container>)}
+                </Container>)
+            }
         </>
     )
 }

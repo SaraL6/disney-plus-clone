@@ -1,40 +1,55 @@
 import React from 'react'
 import styled from 'styled-components'
-
+import { useParams } from 'react-router-dom'
+import useDetail from '../components/hooks/useDetail'
+import apiKey from "../app/utils"
 
 function Detail() {
+    const { id } = useParams();
+    const { singleMovie } = useDetail(id, apiKey);
+    let genres = singleMovie.genres;
+    let releaseYear = singleMovie?.release_date?.split('-')[0];
     return (
-        <Container>
-            <Background>
-                <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/9D8AEB7DE234898392BFD20E7D9B112B841E920AF9A3F54CCFB966722AFF3461/scale?width=1920&aspectRatio=1.78&format=jpeg" alt="" />
-            </Background>
-            <ImageTitle>
-                <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/EF737B93E2F2ABE27C74CBBEB322F18A421E7986129E9989587CEF2295B0447F/scale?width=1344&aspectRatio=1.78&format=png" alt="" />
-            </ImageTitle>
-            <Controls>
-                <PlayButton>
-                    <img src="/images/play-icon-black.png" alt="" />
-                    <span>PLAY</span>
-                </PlayButton>
-                <TrailerButton>
-                    <img src="/images/play-icon-white.png" alt="" />
-                    <span>Trailer</span>
-                </TrailerButton>
-                <AddButton>
-                    <span>+</span>
-                </AddButton>
-                <GroupWatchButton>
-                    <img src="/images/group-icon.png" alt="" />
-                </GroupWatchButton>
-            </Controls>
-            <SubTitle>
-                2018 · 7m · Family, Fantasy, Kids, Animation
-            </SubTitle>
-            <Description>
+        <>
+            {singleMovie &&
+                <Container>
+                    <Background>
+                        {singleMovie?.backdrop_path &&
+                            <img src={`https://image.tmdb.org/t/p/w1280/${singleMovie?.backdrop_path}`} alt="" />
+                        }
+                    </Background>
+                    <ImageTitle>
+                        <h2>{singleMovie.title} </h2>
+                    </ImageTitle>
+                    <Controls>
+                        <PlayButton>
+                            <img src="/images/play-icon-black.png" alt="" />
+                            <span>PLAY</span>
+                        </PlayButton>
+                        <TrailerButton>
+                            <img src="/images/play-icon-white.png" alt="" />
+                            <span>Trailer</span>
+                        </TrailerButton>
+                        <AddButton>
+                            <span>+</span>
+                        </AddButton>
+                        <GroupWatchButton>
+                            <img src="/images/group-icon.png" alt="" />
+                        </GroupWatchButton>
+                    </Controls>
+                    <SubTitle>
 
-                An aging Chinese mom suffering from empty nest syndrome gets another chance at motherhood when one of her dumplings springs to life as a lively, giggly dumpling boy.
-            </Description>
-        </Container>
+                        <span> {releaseYear} • </span>
+                        <span> {singleMovie.runtime} minutes  • </span>
+                        <span> {genres && genres.map((genre) => { return genre.name }).join("  •  ")}
+
+                        </span>
+                    </SubTitle>
+                    <Description>
+                        {singleMovie.overview}
+                    </Description>
+                </Container>}
+        </>
     )
 }
 
@@ -53,11 +68,10 @@ left:0;
 bottom:0;
 right:0;
 z-index:-1;
-opacity:0.8;
+opacity:0.6;
 img{
     object-fit:cover;
     width:100%;
-    height:100%;
 }
 
 `
@@ -69,16 +83,11 @@ display: flex;
 justify-content: flex-start;
 margin: 0px auto;
 height: 24vw;
-min-height: 170px;
-padding-bottom: 24px;
-width: 100%;
+font-size:50px;
 
-
-img {
-    max-width: 600px;
-    min-width: 200px;
-    width: 35vw;
-  }
+h2{
+    margin: 22px 0px;
+}
 
 `
 
@@ -136,6 +145,9 @@ color: rgb(249,249,249);
 font-size:15px;
 min-height:20px;
 margin-top:26px;
+span{
+    padding:5px;
+}
 `
 
 const Description = styled.div`

@@ -1,8 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+
+
 function Header() {
+    let path = window.location.pathname.split('/')[1];
+
     return (
-        <Nav>
+        <Nav style={{ background: path === 'detail' ? 'transparent ' : '#090b13' }}>
             <Logo src="/images/logo.svg" />
             <NavMenu>
                 <a href="#">
