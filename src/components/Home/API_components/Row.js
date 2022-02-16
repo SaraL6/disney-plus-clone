@@ -16,6 +16,7 @@ function Row({ title, fetchUrl }) {
         speed: 500,
         slidesToShow: 5,
         slidesToScroll: 3,
+        lazyLoad: true,
         autoplay: false
     }
 

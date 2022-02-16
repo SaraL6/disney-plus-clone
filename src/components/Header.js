@@ -1,43 +1,86 @@
 import React from 'react'
 import styled from 'styled-components'
+import { selectUserName, selectPhoto, selectEmail, setUserLogin, setSignOut } from '../features/user/userSlice'
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux'
 
+import { auth, provider } from "../firebase";
 
 function Header() {
+    const dispatch = useDispatch();
     let path = window.location.pathname.split('/')[1];
+    const userName = useSelector(selectUserName);
+    const userPhoto = useSelector(selectPhoto);
+    console.log(userPhoto);
+    const signIn = () => {
+        auth.signInWithPopup(provider)
+            .then((result) => {
+                let user = result.user;
+                dispatch(setUserLogin({
+                    name: user.displayName,
+                    email: user.email,
+                    photo: user.photoURL
+                }))
+            });
+        console.log(userPhoto);
+
+    }
+    const signOut = () => {
+        auth.signOut()
+            .then(() => {
+                dispatch(setSignOut)
+            })
+
+    }
 
     return (
         <Nav style={{ background: path === 'detail' ? 'transparent ' : '#090b13' }}>
             <Logo src="/images/logo.svg" />
-            <NavMenu>
-                <a href="#">
-                    <img src="/images/home-icon.svg" alt="" />
-                    <span>HOME</span>
-                </a>
-                <a href="#">
-                    <img src="/images/search-icon.svg" alt="" />
-                    <span>SEARCH</span>
-                </a>
+            {!userName ? (
+                <LoginContainer>
+                    <Login onClick={signIn}>Login</Login>
+                </LoginContainer>
+            ) :
+                <>
+                    <NavMenu>
+                        <a href="#">
+                            <img src="/images/home-icon.svg" alt="" />
+                            <span>HOME</span>
+                        </a>
+                        <a href="#">
+                            <img src="/images/search-icon.svg" alt="" />
+                            <span>SEARCH</span>
+                        </a>
 
-                <a href="#">
-                    <img src="/images/watchlist-icon.svg" alt="" />
-                    <span>WATCHLIST</span>
-                </a>
+                        <a href="#">
+                            <img src="/images/watchlist-icon.svg" alt="" />
+                            <span>WATCHLIST</span>
+                        </a>
 
-                <a href="#">
-                    <img src="/images/original-icon.svg" alt="" />
-                    <span>ORIGINALS</span>
-                </a>
-                <a href="#">
-                    <img src="/images/movie-icon.svg" alt="" />
-                    <span>MOVIES</span>
-                </a>
-                <a href="#">
-                    <img src="/images/series-icon.svg" alt="" />
-                    <span>SERIES</span>
-                </a>
-            </NavMenu>
+                        <a href="#">
+                            <img src="/images/original-icon.svg" alt="" />
+                            <span>ORIGINALS</span>
+                        </a>
+                        <a href="#">
+                            <img src="/images/movie-icon.svg" alt="" />
+                            <span>MOVIES</span>
+                        </a>
+                        <a href="#">
+                            <img src="/images/series-icon.svg" alt="" />
+                            <span>SERIES</span>
+                        </a>
+                    </NavMenu>
+                    {!userPhoto ?
+                        <UserImg src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"></UserImg> :
+                        <UserImg src={userPhoto}></UserImg>
 
-            <UserImg src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"></UserImg>
+                    }
+
+                </>
+
+            }
+
+
         </Nav>
     )
 }
@@ -110,4 +153,27 @@ width:40px;
 height:48px;
 border-radius:50%;
 cursor:pointer;
+`
+
+const Login = styled.div`
+border:1px solid #f9f9f9;
+padding:8px 16px;
+border-radius:4px;
+letter-spacing:1.5px;
+text-transform: uppercase;
+background-color:rgba(0,0,0,0.6);
+transition:all 0.2s ease 0s;
+cursor:pointer;
+
+&:hover{
+    background-color:#f9f9f9;
+    color:#000;
+    border-color:transparent;
+}
+`
+
+const LoginContainer = styled.div`
+flex:1;
+display:flex;
+justify-content:flex-end;
 `
