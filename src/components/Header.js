@@ -1,17 +1,31 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import styled from 'styled-components'
 import { selectUserName, selectPhoto, selectEmail, setUserLogin, setSignOut } from '../features/user/userSlice'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux'
-
+import { useNavigate } from 'react-router-dom'
 import { auth, provider } from "../firebase";
 
 function Header() {
     const dispatch = useDispatch();
-    let path = window.location.pathname.split('/')[1];
+    const history = useNavigate();
     const userName = useSelector(selectUserName);
     const userPhoto = useSelector(selectPhoto);
-    console.log(userPhoto);
+    let path = window.location.pathname.split('/')[1];
+
+    useEffect(()=>{
+        auth.onAuthStateChanged(async(user)=>{
+            if(user){
+                dispatch(setUserLogin({
+                    name: user.displayName,
+                    email: user.email,
+                    photo: user.photoURL
+                }))
+                history("/");
+            }
+        })
+    },[])
+
     const signIn = () => {
         auth.signInWithPopup(provider)
             .then((result) => {
@@ -21,14 +35,15 @@ function Header() {
                     email: user.email,
                     photo: user.photoURL
                 }))
+                history("/");
             });
-        console.log(userPhoto);
 
     }
     const signOut = () => {
         auth.signOut()
             .then(() => {
-                dispatch(setSignOut)
+                dispatch(setSignOut());
+                history("/login");
             })
 
     }
@@ -72,7 +87,7 @@ function Header() {
                     </NavMenu>
                     {!userPhoto ?
                         <UserImg src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"></UserImg> :
-                        <UserImg src={userPhoto}></UserImg>
+                        <UserImg src={userPhoto} onClick={signOut}></UserImg>
 
                     }
 
