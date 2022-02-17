@@ -1,3 +1,3 @@
-const apiKey = '71034ea0995999968e56c3a6d624e0b4';
-
+const apiKey = process.env.REACT_APP_TMDB_API_KEY
+;
 export default apiKey;
