@@ -41,12 +41,14 @@ function Brands() {
         },
     ];
     return (
+
         <Container>
             {cards.map((card) => {
-                return <BrandsCard key={card.brand} image={card.image} />
+                return <Card key={card.brand} image={card.image} video={card.video} />
 
             })}
         </Container>
+
     )
 }
 
@@ -60,14 +62,16 @@ const Container = styled.div`
     grid-template-columns:repeat(5,minmax(0,1fr));
 `
 
-const Wrap = styled(BrandsCard)`
+const Card = styled(BrandsCard)`
 border-radius:10px;
 cursor:pointer;
 border: 3px solid rgba(249,249,249,0.1);
 box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px,
  rgb(0 0 0 / 73%) 0px 16px 10px -10px;
  transition: all 250ms cubic-bezier(0.25,0.46,0.45,0.94) 0s;
-
+ position: relative;  margin: 0 8px;
+ margin-top: 15px;
+ transform: scale(1);
 
     img{
         width:100%;

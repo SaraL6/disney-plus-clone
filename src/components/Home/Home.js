@@ -88,9 +88,8 @@ function Home() {
       <Row title={"Action and Adventures"} fetchUrl={requests.fetchMarvel}></Row>
       <Row title={"Disney Series"} fetchUrl={requests.fetchDisneySeries}></Row>
       <Row title={"Pixar Movies"} fetchUrl={requests.fetchPixar}></Row>
-      <Row title={"Disney Classics"} fetchUrl={requests.fetchDisneyClassics}></Row>
       <Row title={"Pixar Music"} fetchUrl={requests.fetchMusicPixar}></Row>
-      <Row title={"The Simpsons"} fetchUrl={requests.fetchSimpsons}></Row>
+      <Row title={"Disney Classics"} fetchUrl={requests.fetchDisneyClassics}></Row>
     </Container>
   )
 }
@@ -100,7 +99,6 @@ export default Home
 const Container = styled.main`
   min-height: calc(100vh - 70px);
   padding: 0 calc(3.5vw + 48px);
-  position: relative;
   overflow-x:hidden;
   &:before{
     background: url('/images/home-background.png') center center / cover
