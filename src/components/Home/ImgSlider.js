@@ -43,7 +43,7 @@ li.slick-active button:before{
     color:white;
 }
 .slick-list{
-    overflow:visible;
+    overflow: visible;
 }
 button{
     z-index:1;

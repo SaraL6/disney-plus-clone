@@ -73,6 +73,7 @@ li.slick-active button:before{
     color:white;
 }
 .slick-list{
+    overflow: unset;
 }
 button{
     z-index:1;
