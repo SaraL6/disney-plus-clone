@@ -1,10 +1,11 @@
-import React,{useEffect} from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { selectUserName, selectPhoto, selectEmail, setUserLogin, setSignOut } from '../features/user/userSlice'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { auth, provider } from "../firebase";
+import { Link } from 'react-router-dom';
 
 function Header() {
     const dispatch = useDispatch();
@@ -13,9 +14,9 @@ function Header() {
     const userPhoto = useSelector(selectPhoto);
     let path = window.location.pathname.split('/')[1];
 
-    useEffect(()=>{
-        auth.onAuthStateChanged(async(user)=>{
-            if(user){
+    useEffect(() => {
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
                 dispatch(setUserLogin({
                     name: user.displayName,
                     email: user.email,
@@ -24,7 +25,7 @@ function Header() {
                 history("/");
             }
         })
-    },[])
+    }, [])
 
     const signIn = () => {
         auth.signInWithPopup(provider)
@@ -50,7 +51,9 @@ function Header() {
 
     return (
         <Nav style={{ background: path === 'detail' ? 'transparent ' : '#090b13' }}>
-            <Logo src="/images/logo.svg" />
+            <Link to={"/"}>
+                <Logo src="/images/logo.svg" />
+            </Link>
             {!userName ? (
                 <LoginContainer>
                     <Login onClick={signIn}>Login</Login>
@@ -58,10 +61,14 @@ function Header() {
             ) :
                 <>
                     <NavMenu>
-                        <a href="#">
+
+
+                        <Link to={"/"}>
                             <img src="/images/home-icon.svg" alt="" />
                             <span>HOME</span>
-                        </a>
+                        </Link>
+
+
                         <a href="#">
                             <img src="/images/search-icon.svg" alt="" />
                             <span>SEARCH</span>
@@ -87,7 +94,7 @@ function Header() {
                     </NavMenu>
                     {!userPhoto ?
                         <UserImg src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"></UserImg> :
-                        <UserImg src={userPhoto} onClick={signOut}></UserImg>
+                        <UserImg rel="noreferrer" src={userPhoto} onClick={signOut}></UserImg>
 
                     }
 

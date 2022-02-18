@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import ImgSlider from './ImgSlider'
 import Movies from './Movies'
 import Originals from './Originals'
-import Viewers from './Viewers'
+import Brands from './Brands'
 import Hollywood from './Hollywood'
 import New from './New'
 import KidsTv from './KidsTv'
@@ -74,7 +74,7 @@ function Home() {
   return (
     <Container>
       <ImgSlider />
-      <Viewers />
+      <Brands />
 
       {/* <Movies />
       <Originals />
@@ -86,11 +86,11 @@ function Home() {
       {/* API Components */}
       <Row title={"Disney Movies"} fetchUrl={requests.fetchDisney}></Row>
       <Row title={"Action and Adventures"} fetchUrl={requests.fetchMarvel}></Row>
-      <Row title={"Disney Classics"} fetchUrl={requests.fetchDisneyClassics}></Row>
       <Row title={"Disney Series"} fetchUrl={requests.fetchDisneySeries}></Row>
       <Row title={"Pixar Movies"} fetchUrl={requests.fetchPixar}></Row>
-      {/* <Row title={"Pixar Music"} fetchUrl={requests.fetchMusicPixar}></Row>
-      <Row title={"The Simpsons"} fetchUrl={requests.fetchSimpsons}></Row> */}
+      <Row title={"Disney Classics"} fetchUrl={requests.fetchDisneyClassics}></Row>
+      <Row title={"Pixar Music"} fetchUrl={requests.fetchMusicPixar}></Row>
+      <Row title={"The Simpsons"} fetchUrl={requests.fetchSimpsons}></Row>
     </Container>
   )
 }

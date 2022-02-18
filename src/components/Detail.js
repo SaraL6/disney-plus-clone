@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import useDetail from '../components/hooks/useDetail'
-import apiKey from "../app/utils"
+import { apiKey } from "../app/utils"
 
 function Detail() {
     const { id } = useParams();

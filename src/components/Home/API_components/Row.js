@@ -4,28 +4,17 @@ import Slider from "react-slick";
 import { Link } from 'react-router-dom';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { sliderSettings } from '../../../app/utils';
 import useRow from '../../hooks/useRow'
 function Row({ title, fetchUrl }) {
     const { medias } = useRow(fetchUrl);
-    let settings = {
-        className: "center",
-        centerMode: true,
-        centerPadding: "60px",
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 5,
-        slidesToScroll: 3,
-        lazyLoad: true,
-        autoplay: false
-    }
 
     return (
         <>
             {medias.length > 0 && (
-                <Container>
+                <Container className='movieRows'>
                     <h4> {title} </h4>
-                    <Carousel {...settings}>
+                    <Carousel {...sliderSettings}>
 
                         {medias.map((media) =>
 
@@ -52,11 +41,12 @@ const Container = styled.div`
 `
 
 const Wrap = styled.div`
+padding:10px;
 border-radius:10px;
 cursor:pointer;
 img{
     border:4px solid transparent;
-    border-radius:4px;
+    border-radius:10px;
     width:100%;
     height:100%;
     box-shadow:rgb(0 0 0 / 69%) 0px 26px 30px -10px,
@@ -64,7 +54,8 @@ img{
     transition-duration:300ms;
 
     &:hover{
-        border:4px solid rgba(249,249,249,0.8);
+        transform:scale(1.05);
+        border-color:rgba(249,249,249,0.8);
     }
 }
 `

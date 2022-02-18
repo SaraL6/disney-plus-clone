@@ -27,8 +27,7 @@ function App() {
         <Routes >
 
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/detail/:id" element={<Detail />}> </Route>
-          {userName}
+          <Route path="/detail/:id" element={isAuthenticated ? <Detail /> : <Navigate replace to="/login" />}> </Route>
           <Route path="/" element={isAuthenticated ? <Home /> : <Navigate replace to="/login" />}>
           </Route>
 
