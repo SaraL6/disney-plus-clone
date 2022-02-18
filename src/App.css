@@ -9,25 +9,35 @@
     font-family: Nunito-Regular;
   
 }
+.movieRows:hover  > .slick-slider >.slick-arrow > .MuiSvgIcon-root {
+  display:block !important;
+ 
+}
 
 .slick-prev:before, .slick-next:before  {
   content: '' !important;
 }
-/* .slick-arrows{
-  color:white;
-  display:none !important;
-  transition: all 300ms ease-in-out 0s !important;
-  transform: scale(1);
+button.slick-arrow.slick-prev {
+  height: 100%;
+  width: 125px;
+  left: -70px;
 }
-.movieRows{
-  transition: all 300ms ease-in-out 0s !important;
-  transform: scale(1);
+ button.slick-arrow.slick-next {
+  height: 100%;
+  width: 125px;
+  right: -114px;
+  padding: 50px;
+
+}
+button:hover .MuiSvgIcon-root{
+  display: block;
 }
 
-.movieRows:hover  > .slick-slider .slick-arrows{
-  display:block !important;
-  transition: all 300ms ease-in-out 0s !important;
-  transform: scale(1);
 
+.slick-arrow >  .MuiSvgIcon-root { 
+  display: none ;
+}
+.slick-arrow:hover  .MuiSvgIcon-root{
+  display: block !important;
+}
 
-} */

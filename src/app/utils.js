@@ -5,34 +5,41 @@ export const apiKey = process.env.REACT_APP_TMDB_API_KEY;
 
 
 
+const SlickArrowLeft = ({ currentSlide, slideCount, style, ...props }) => (
+    <button
+        {...props}
+        className={
+            "slick-prev slick-arrow" +
+            (currentSlide === 0 ? " slick-disabled" : "")
+        }
+        aria-hidden="true"
+        aria-disabled={currentSlide === 0 ? true : false}
+        type="button"
+        style={{
+            ...style, display: "block", color: "white"
+            ,
+            transitionDuration: "300ms"
+        }}
+    >
+        <ArrowBackIosIcon />
+    </button >
+);
+const SlickArrowRight = ({ currentSlide, slideCount, style, ...props }) => (
+    <button
+        {...props}
+        className={
+            "slick-next slick-arrow" +
+            (currentSlide === slideCount - 1 ? " slick-disabled" : "")
+        }
+        aria-hidden="true"
+        aria-disabled={currentSlide === slideCount - 1 ? true : false}
+        type="button"
+        style={{ ...style, display: "block", color: "white" }}
 
-
-function SampleNextArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            style={{ ...style, display: "block", color: "white" }}
-            onClick={onClick}
-        >
-            <ArrowForwardIosIcon />
-        </div>
-    );
-}
-
-
-function SamplePrevArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            style={{ ...style, display: "block", color: "white" }}
-            onClick={onClick}
-        >
-            <ArrowBackIosIcon />
-        </div>
-    );
-}
+    >
+        <ArrowForwardIosIcon />
+    </button>
+);
 
 export const sliderSettings = {
     className: "center",
@@ -45,12 +52,9 @@ export const sliderSettings = {
     slidesToScroll: 3,
     lazyLoad: true,
     autoplay: false,
-    nextArrow: <SampleNextArrow className="slick-arrows" />,
-    // prevArrow: (
-    //     <button className="arrow-button">
+    nextArrow: <SlickArrowRight />,
+    prevArrow: <SlickArrowLeft />
 
-    //         <SamplePrevArrow className="slick-arrows" />
-    //     </button>
 
-    // )
+
 }
