@@ -69,10 +69,10 @@ function Header() {
                         </Link>
 
 
-                        <a href="#">
+                        <Link to={"/search"}>
                             <img src="/images/search-icon.svg" alt="" />
                             <span>SEARCH</span>
-                        </a>
+                        </Link>
 
                         <a href="#">
                             <img src="/images/watchlist-icon.svg" alt="" />

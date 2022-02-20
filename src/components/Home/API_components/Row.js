@@ -6,9 +6,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { sliderSettings } from '../../../app/utils';
 import useRow from '../../hooks/useRow'
+import SingleMovie from './SingleMovie';
 function Row({ title, fetchUrl }) {
     const { medias } = useRow(fetchUrl);
-
+    console.log(medias)
     return (
         <>
             {medias.length > 0 && (
@@ -18,11 +19,7 @@ function Row({ title, fetchUrl }) {
 
                         {medias.map((media) =>
 
-                            <Wrap key={media.id} >
-                                <Link to={`/detail/${media.id}`}>
-                                    <img src={`https://image.tmdb.org/t/p/w500/${media.backdrop_path}`} alt="" />
-                                </Link>
-                            </Wrap>
+                            <SingleMovie key={media.id} id={media.id} poster={media.backdrop_path} title={media.title} name={media.name} />
 
                         )}
 
@@ -40,25 +37,8 @@ const Container = styled.div`
 
 `
 
-const Wrap = styled.div`
-padding:10px;
-border-radius:10px;
-cursor:pointer;
-img{
-    border:4px solid transparent;
-    border-radius:10px;
-    width:100%;
-    height:100%;
-    box-shadow:rgb(0 0 0 / 69%) 0px 26px 30px -10px,
-    rgb(0 0 0/73%) 0px 16px 10px -10px;
-    transition-duration:300ms;
 
-    &:hover{
-        transform:scale(1.05);
-        border-color:rgba(249,249,249,0.8);
-    }
-}
-`
+
 const Carousel = styled(Slider)`
 margin-top:20px;
 
@@ -79,4 +59,7 @@ button{
     z-index:1;
 
 }
+.slick-slide:not(.slick-active) {
+    opacity: 0.5;
+  }
 `

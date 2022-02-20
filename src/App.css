@@ -39,8 +39,6 @@ button:hover .MuiSvgIcon-root{
 }
 .slick-arrow:hover  .MuiSvgIcon-root{
   display: block !important;
+
 }
 
-.slick-slide:not(.slick-active) {
-  opacity: 0.5;
-}

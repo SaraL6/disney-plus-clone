@@ -14,6 +14,7 @@ import {
   Navigate
 } from "react-router-dom";
 import Footer from './components/Footer';
+import Search from './components/Search';
 
 function App() {
   const userName = useSelector(selectUserName);
@@ -27,8 +28,10 @@ function App() {
         <Routes >
 
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/search" element={isAuthenticated ? <Search /> : <Navigate replace to="/login" />}></Route>
           <Route path="/detail/:id" element={isAuthenticated ? <Detail /> : <Navigate replace to="/login" />}> </Route>
           <Route path="/" element={isAuthenticated ? <Home /> : <Navigate replace to="/login" />}>
+
           </Route>
 
         </Routes >

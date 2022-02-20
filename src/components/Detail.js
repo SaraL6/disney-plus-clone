@@ -9,7 +9,7 @@ function Detail() {
     const { singleMovie } = useDetail(id, apiKey);
     let genres = singleMovie.genres;
     let releaseYear = singleMovie?.release_date?.split('-')[0];
-    console.log(singleMovie);
+  
     return (
         <>
             {singleMovie &&
